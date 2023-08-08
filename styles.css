@@ -1,0 +1,95 @@
+/* styles.css */
+
+/* Estilo para o gráfico */
+#chart {
+    width: 100%;
+    max-width: 800px; /* Ajuste o valor máximo conforme necessário */
+    margin: 20px auto;
+}
+
+/* Ajustar o tamanho do gráfico para dispositivos menores */
+@media (max-width: 600px) {
+    #chart {
+        max-width: 100%;
+    }
+}
+
+/* Estilo para a tabela de resultados */
+#results table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+#results th, #results td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
+
+#results th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+/* Estilo para o formulário e resultados */
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+#investment-form {
+    border: 1px solid #ddd;
+    padding: 20px;
+    margin-bottom: 20px;
+    width: 100%;
+    max-width: 600px; /* Defina um valor máximo para o formulário */
+}
+
+#investment-form label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+#investment-form input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+}
+
+#investment-form button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+#investment-form button:hover {
+    background-color: #0056b3;
+}
+
+/* Outros estilos da página */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
+}
+
+header {
+    background-color: #007bff;
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+}
+
+h1 {
+    margin: 0;
+    font-size: 24px;
+}
+
