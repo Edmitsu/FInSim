@@ -1,9 +1,9 @@
-// script.js
 function calculateResults() {
     const initialAmount = parseFloat(document.getElementById('initial-amount').value);
     const monthlyDeposit = parseFloat(document.getElementById('monthly-deposit').value);
     const interestRate = parseFloat(document.getElementById('interest-rate').value) / 100;
     const investmentPeriod = parseInt(document.getElementById('investment-period').value);
+    const reinvest = document.getElementById('reinvest').checked;
 
     let currentAmountWithoutDeposit = initialAmount;
     let currentAmountWithDeposit = initialAmount;
@@ -13,20 +13,30 @@ function calculateResults() {
     tableHtml += '<tr><th>Mês</th><th>Patrimônio (Com Aportes)</th><th>Rendimento (Com Aportes)</th><th>Patrimônio (Sem Aportes)</th><th>Rendimento (Sem Aportes)</th></tr>';
 
     for (let month = 1; month <= investmentPeriod; month++) {
-        const rendimentoComAportes = (currentAmountWithDeposit + monthlyDeposit) * interestRate;
-        const rendimentoSemAportes = currentAmountWithoutDeposit * interestRate;
-        const patrimonioSemAportes = currentAmountWithoutDeposit;
+        let rendimentoComAportes;
+        if (reinvest) {
+            rendimentoComAportes = (currentAmountWithDeposit + monthlyDeposit) * interestRate;
+            currentAmountWithDeposit = currentAmountWithDeposit + monthlyDeposit + rendimentoComAportes;
+        } else {
+            rendimentoComAportes = currentAmountWithDeposit * interestRate;
+            currentAmountWithDeposit = currentAmountWithDeposit + monthlyDeposit;
+        }
+
+        let rendimentoSemAportes;
+        if (reinvest) {
+            rendimentoSemAportes = currentAmountWithoutDeposit * interestRate;
+            currentAmountWithoutDeposit += currentAmountWithoutDeposit * interestRate;
+        } else {
+            rendimentoSemAportes = currentAmountWithoutDeposit * interestRate;
+        }
 
         tableHtml += '<tr>';
         tableHtml += `<td>${month}</td>`;
         tableHtml += `<td>R$ ${currentAmountWithDeposit.toFixed(2)}</td>`;
         tableHtml += `<td>R$ ${rendimentoComAportes.toFixed(2)}</td>`;
-        tableHtml += `<td>R$ ${patrimonioSemAportes.toFixed(2)}</td>`;
+        tableHtml += `<td>R$ ${currentAmountWithoutDeposit.toFixed(2)}</td>`;
         tableHtml += `<td>R$ ${rendimentoSemAportes.toFixed(2)}</td>`;
         tableHtml += '</tr>';
-
-        currentAmountWithoutDeposit += currentAmountWithoutDeposit * interestRate;
-        currentAmountWithDeposit = (currentAmountWithDeposit + monthlyDeposit) * (1 + interestRate);
     }
 
     tableHtml += '</table>';
