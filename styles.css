@@ -1,16 +1,22 @@
-/* Ajustar o tamanho do gráfico para dispositivos menores */
+
 @media (max-width: 600px) {
     #chart {
         max-width: 100%;
     }
+
+    h2{
+        font-size: calc(var(--font-size)*.75);
+
+    }
 }
 
-/* Estilo para a tabela de resultados */
+
 #results table {
     width: 100%;
+    margin: 0 auto;
     border-collapse: collapse;
     margin-top: 20px;
-    overflow-x: auto; /* Permite a rolagem horizontal */
+    overflow-x: auto; 
 }
 
 #results th, #results td {
@@ -24,22 +30,22 @@
     font-weight: bold;
 }
 
-/* Estilo para a tabela em dispositivos móveis */
+
 @media (max-width: 600px) {
     #results table {
-        font-size: 12px; /* Reduz o tamanho da fonte para dispositivos móveis */
+        font-size: 12px; 
     }
 
     #results th, #results td {
-        padding: 6px; /* Reduz o espaçamento interno das células */
+        padding: 6px; 
     }
 
     #results th {
-        font-size: 14px; /* Tamanho da fonte para cabeçalhos em dispositivos móveis */
+        font-size: 14px; 
     }
 }
 
-/* Estilo para o formulário e resultados */
+
 main {
     display: flex;
     flex-direction: column;
@@ -52,7 +58,7 @@ main {
     padding: 20px;
     margin-bottom: 20px;
     width: 100%;
-    max-width: 600px; /* Defina um valor máximo para o formulário */
+    max-width: 600px; 
 }
 
 #investment-form label {
@@ -80,7 +86,10 @@ main {
     background-color: #0056b3;
 }
 
-/* Outros estilos da página */
+#reinvest {
+    margin-left: 5px;
+}
+
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -98,8 +107,4 @@ header {
 h1 {
     margin: 0;
     font-size: 24px;
-}
-
-#reinvest {
-    margin-left: 5px;
 }
