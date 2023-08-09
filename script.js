@@ -8,26 +8,35 @@ function calculateResults() {
     let currentAmountWithoutDeposit = initialAmount;
     let currentAmountWithDeposit = initialAmount;
 
+    let totalRendimentoResgatado = 0;
+
     let tableHtml = '<h2>Resultados da Simulação</h2>';
     tableHtml += '<table>';
-    tableHtml += '<tr><th>Mês</th><th>Patrimônio (Com Aportes)</th><th>Rendimento (Com Aportes)</th><th>Patrimônio (Sem Aportes)</th><th>Rendimento (Sem Aportes)</th></tr>';
+
+    let tituloTable = '<tr><th>Mês</th><th>Patrimônio (Com Aportes)</th><th>Rendimento (Com Aportes)</th>';
+    tituloTable += `<th>Patrimônio (Sem Aportes)</th><th>Rendimento (Sem Aportes)</th>`;
+
+    if (!reinvest) {
+        tituloTable += `<th>Total Rendimento Resgatado</th>`;
+    }
+
+    tituloTable += '</tr>';
+    tableHtml += tituloTable;
 
     for (let month = 1; month <= investmentPeriod; month++) {
         let rendimentoComAportes;
+        let rendimentoSemAportes;
+
         if (reinvest) {
             rendimentoComAportes = (currentAmountWithDeposit + monthlyDeposit) * interestRate;
             currentAmountWithDeposit = currentAmountWithDeposit + monthlyDeposit + rendimentoComAportes;
-        } else {
-            rendimentoComAportes = currentAmountWithDeposit * interestRate;
-            currentAmountWithDeposit = currentAmountWithDeposit + monthlyDeposit;
-        }
-
-        let rendimentoSemAportes;
-        if (reinvest) {
             rendimentoSemAportes = currentAmountWithoutDeposit * interestRate;
             currentAmountWithoutDeposit += currentAmountWithoutDeposit * interestRate;
         } else {
+            rendimentoComAportes = currentAmountWithDeposit * interestRate;
+            currentAmountWithDeposit = currentAmountWithDeposit + monthlyDeposit;
             rendimentoSemAportes = currentAmountWithoutDeposit * interestRate;
+            totalRendimentoResgatado += rendimentoSemAportes;
         }
 
         tableHtml += '<tr>';
@@ -36,6 +45,11 @@ function calculateResults() {
         tableHtml += `<td>R$ ${rendimentoComAportes.toFixed(2)}</td>`;
         tableHtml += `<td>R$ ${currentAmountWithoutDeposit.toFixed(2)}</td>`;
         tableHtml += `<td>R$ ${rendimentoSemAportes.toFixed(2)}</td>`;
+
+        if (!reinvest) {
+            tableHtml += `<td>R$ ${totalRendimentoResgatado.toFixed(2)}</td>`;
+        }
+
         tableHtml += '</tr>';
     }
 
